@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home | Details</title>
+</head>
+<head lang="en" th:replace="views/header::header"></head>
+<body>
+	<nav lang="en" th:replace="views/navbar::menu"></nav>
+	<div class="container" style="margin: 20px auto;">
+		<div th:switch="${task}">
+			<h2 th:case="null" style="margin: 100px auto;">ToDo not Found!</h2>
+			<div th:case="*">
+				<h1 class="page-header text-center">
+					<span th:utext="${task.name}"></span>
+				</h1>
+				<!-- <h5 th:text="${task.name}"></h5> -->
+				<div class="row">
+					<div class="col-md-2"></div>
+					<div class="col">
+						<ul class="list-group">
+
+							<li class="list-group-item"><strong>Due Date : </strong><span
+								th:utext="${#dates.format(task.duedate, 'dd-MMM-yyyy hh:mm a')}"></span>
+							</li>
+							<li class="list-group-item"><strong>Create / Update
+									Date : </strong> <span th:utext="${task.createDateTime}"></span></li>
+							<li class="list-group-item"><strong>Details : </strong><span
+								th:utext="${task.description}"></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div lang="en" th:replace="views/footer::footer"></div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="views/header::header"></head>
+<body>
+<nav lang="en" th:replace="views/navbar::menu"></nav>
+	<div class="container" style="margin: 20px auto;">
+		<h1 class="page-header text-center">Your ToDo List</h1>
+		<div class="row" style="margin-bottom: 20px;">
+			<div class="col-md-2 col-md-offset-1">
+				<a th:href="@{/add}" class="btn btn-success"><i
+					class="glyphicon glyphicon-plus"></i> Add Todo</a>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<p th:each="todo : ${todos}">
+				<span th:utext="${todo}"></span>
+			</p>
+		</div> -->
+		
+		<div th:if="${message}">
+			<div class="alert alert-success alert-dismissible fade in" id="success-alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong> <span th:utext="${message}"></span>
+		</div>
+		</div>
+		<!-- ELSE -->
+		<div th:if="${message2}">
+			<div class="alert alert-error alert-dismissible fade in">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Error!</strong> <span th:utext="${message2}"></span>
+		</div>
+		</div>
+
+		<div class="row">
+			<table class="table table-stripe">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>name</th>
+						<th>due date</th>
+						<th>action</th>
+					</tr>
+					<tr th:each="todo,iter : ${todos}">
+						<td><span th:utext="${iter.index+1}"></span></td>
+						<td><span th:utext="${todo.name}"></span></td>
+						<td><span
+							th:utext="${#dates.format(todo.duedate, 'dd-MMM-yyyy hh:mm a')}"></span></td>
+						<td><a th:href="@{/details?id=}+${todo.id}"
+							class="btn btn-info"><i class="glyphicon glyphicon-open-file"></i> view</a> <a th:href="@{/edit?editid=}+${todo.id}"
+							class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> edit</a> <a
+							th:href="@{/delete?deleteid=}+${todo.id}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> delete</a>
+						</td>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+<div lang="en" th:replace="views/footer::footer"> </div>
+</body>
+</html>
